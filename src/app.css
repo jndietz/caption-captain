@@ -1,0 +1,7 @@
+body {
+    margin: auto;
+}
+
+#app {
+    display: flex;
+}
