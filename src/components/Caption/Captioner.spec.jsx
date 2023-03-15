@@ -1,4 +1,4 @@
-import { parseFieldName } from './Caption'
+import { parseFieldName } from './Captioner'
 
 describe("Caption", () => {
     it("should parse a field name", () => {

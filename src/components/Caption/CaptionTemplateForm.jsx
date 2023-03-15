@@ -1,4 +1,6 @@
-import { Textarea, Button, Group, Box, TextInput } from '@mantine/core';
+import { useRef, useEffect } from 'react';
+import { Textarea, Button, Group, Box, TextInput, ActionIcon } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 
@@ -15,11 +17,12 @@ export const getTitleCasedFieldName = (fieldName) => {
     return titleCasedFieldName;
 }
 
-export const Configuration = () => {
+export const CaptionTemplateForm = () => {    
 
-    const { control, handleSubmit, getValues, register, setValue, watch, formState } = useForm({
+    const { control, getValues, register, setValue, formState, watch, reset } = useForm({
         defaultValues: {
             template: 'A <drawingType> of a <gender> sitting on a <chairType>',
+            templateFields: []
         },
     });
 
@@ -28,27 +31,27 @@ export const Configuration = () => {
         name: "templateFields"
     });
 
-    // const watchFieldArray = watch("templateFields");
-    // const controlledFields = fields.map((field, index) => {
-    //     return {
-    //         ...field,
-    //         ...watchFieldArray[index]
-    //     };
-    // });
+    const watchFieldArray = watch("templateFields");
+    const controlledFields = fields.map((field, index) => {
+        return {
+            ...field,
+            ...watchFieldArray[index]
+        };
+    });
 
-    const onSubmit = () => {
+    const generateFields = () => {
         const fieldPlaceholders = getFieldPlaceHolders();
-        console.log(getValues());
         remove();
         fieldPlaceholders.forEach(placeholder => append({ label: getTitleCasedFieldName(placeholder), name: getCamelCasedFieldName(placeholder) }));
+        setValue("captionOutput", getValues("template"));
     }
 
     const handleTemplateOnChange = () => {
-        setValue("captionOutput", getValues("template"))
+        setValue("captionOutput", getValues("template"));
     }
 
     const getFieldPlaceHolders = () => {
-        // TODO eventually support <fieldNames:with|multiple|values>
+        // TODO eventually support <fieldName:with|multiple|values>
         //     👇
         const regex = /(<\w*\:?(\w*\s*|\w*\s*\|)+>)/g;
         const templateString = getValues("template") || "";
@@ -56,19 +59,18 @@ export const Configuration = () => {
         return templateFields;
     }
 
-    const handleCreateCaption = () => {
+    const generateCaption = () => {
         let captionOutput = getValues("template");
         const fieldPlaceHolders = getFieldPlaceHolders();
+        debugger;
         fieldPlaceHolders.forEach(placeholder => {
             captionOutput = captionOutput.replace(placeholder, getValues(`templateFields.${getCamelCasedFieldName(placeholder)}.value`));
         });
-        console.log(formState);
         setValue("captionOutput", captionOutput);
     }
 
     const saveCaption = async () => {
         const { data } = await axios.get("/api/images");
-        console.log(data);
     }
 
     return (
@@ -81,25 +83,28 @@ export const Configuration = () => {
                 />
 
                 <Group position="right" mt="md">
-                    <Button type="button" onClick={() => onSubmit()}>Create Fields</Button>
+                    <Button type="button" onClick={() => generateFields()}>Create Fields</Button>
                 </Group>
 
-                {fields && fields.map((field, index) =>
-                    <TextInput
+                {controlledFields && controlledFields.map((field) => {
+                    return (<TextInput
+                        key={field.id}
                         required={true}
                         label={field.label}
-                        key={index}
-                        {...register(`templateFields.${field.name}.value`)} />
+                        {...register(`templateFields.${field.name}.value`)} />)
+                }
                 )}
-
-                <Textarea
+                
+                <Textarea                    
+                    mt="lg"
                     {...register('captionOutput')}
                     readOnly={true}
                 />
 
                 <Group position="right" mt="md">
-                    <Button type="button" onClick={() => handleCreateCaption()}>Generate Caption</Button>
-                    <Button type="button" disabled={formState.isValid} onClick={() => saveCaption()}>Save Caption</Button>
+                    <Button type="button" onClick={() => generateCaption()}>Generate Caption</Button>
+                    <Button type="button" disabled={!formState.isValid} onClick={() => saveCaption()}>Save Caption</Button>
+                    <ActionIcon onClick={() => reset()}><IconTrash size="1rem" /></ActionIcon>
                 </Group>
             </form>
         </Box>

@@ -1,6 +1,6 @@
 import './app.css';
 import { Nav } from "./components/Nav/Nav";
-import { Caption } from './components/Caption/Caption';
+import { Caption } from './components/Caption/Captioner';
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
