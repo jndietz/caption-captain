@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
-    "@mantine/carousel": "^6.0.2",
+    "@mantine/carousel": "^6.0.1",
     "@mantine/core": "^6.0.1",
     "@mantine/ds": "^6.0.1",
     "@mantine/form": "^6.0.1",
