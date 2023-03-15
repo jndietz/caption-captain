@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme, rem, Stack } from '@mantine/core';
+import { Container, Grid } from '@mantine/core';
 import { CaptionTemplateForm } from './CaptionTemplateForm';
 
 export const Captioner = () => {
