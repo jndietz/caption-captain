@@ -1,29 +1,22 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { Button, Container, FileInput, Group, Input, createStyles } from "@mantine/core"
-import { useState } from "react";
+import { Carousel } from '@mantine/carousel';
 
 export const ImageSelector = () => {
 
-    const [folder, setFolder] = useState("");
-    const styles = createStyles();
+    const images = [
+        "https://m.media-amazon.com/images/M/MV5BZGM0YjhkZmEtNGYxYy00OTk0LThlNDgtNGQzM2YwNjU0NDQzXkEyXkFqcGdeQXVyMTU3ODQxNDYz._V1_FMjpg_UX1000_.jpg",
+        "https://ntvb.tmsimg.com/assets/assets/516020_v9_bc.jpg?w=270&h=360"
+    ];
+
+    const slides = images.map((url) => (
+        <Carousel.Slide key={url}>
+            <Image src={url} />
+        </Carousel.Slide>
+    ));
 
     return (
-        <Container fluid={true}>
-            <Group>
-                <form css={() => css({ display: "flex", alignItems: "flex-end" })}>
-                    <Input.Wrapper
-                        id="input-demo"
-                        withAsterisk
-                        label="Image Folder"
-                    >
-                        <Input id="input-demo" placeholder="C:\path\to\files" />
-                    </Input.Wrapper>
-                    <Button>Load Files</Button>
-                </form>
-            </Group>
-        </Container>
+        <Carousel maw={320} mx="auto" withIndicators>
+            {slides}
+        </Carousel>
+    );
 
-
-    )
 }
