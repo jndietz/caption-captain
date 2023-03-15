@@ -34,7 +34,8 @@
     "msw-storybook-addon": "^1.8.0",
     "nodemon": "^2.0.21",
     "parcel": "^2.8.3",
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "react-refresh": "^0.14.0"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
