@@ -12,7 +12,6 @@ const router = createBrowserRouter([
             {
                 path: "/caption",
                 element: <Captioner />,
-                //loader: async ({ params }) => await axios.get(`/api/images`)
             },
             {
                 path: "/settings",

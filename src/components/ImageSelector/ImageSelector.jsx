@@ -1,9 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import { useFiles } from '../../hooks/useFiles';
 import { useEffect, useState } from 'react';
-
-import useEmblaCarousel from 'embla-carousel-react'
+import { css } from '@emotion/react';
 
 export const ImageSelector = () => {
 
@@ -23,7 +23,7 @@ export const ImageSelector = () => {
     )) : [];
 
     return (
-        <Carousel getEmblaApi={setEmbla} maw={512} mah={768} mx="auto" onSlideChange={index => setSelectedImageIndex(index)}>
+        <Carousel getEmblaApi={setEmbla} maw={512} mah={768} mx="auto" my="auto" onSlideChange={index => setSelectedImageIndex(index)}>
             {slides}
         </Carousel>
     );

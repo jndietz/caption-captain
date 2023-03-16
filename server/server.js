@@ -5,6 +5,8 @@ const fsp = fs.promises;
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.get('/images', async (req, res) => {
     const path = req.query["path"];
     const files = await fsp.readdir(path);
@@ -42,6 +44,27 @@ app.get('/images', async (req, res) => {
     }
 
     res.send(response);
+});
+
+app.post("/images", async (req, res) => {
+
+    const body = req.body;    
+
+    const { captionFilename, caption } = body;
+
+    try {
+        await fsp.writeFile(captionFilename, caption);
+    } catch (e) {
+        console.error("An error occurred trying to write the file");
+        res.send(500);
+    }
+
+    const response = {
+        captionFilename,
+        caption
+    }
+
+    res.status(200).send(response);
 })
 
 app.listen(port, () => {

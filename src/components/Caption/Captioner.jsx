@@ -15,14 +15,19 @@ export const Captioner = () => {
 
   return (
     <FilesProvider value={{ path, setPath, selectedImageIndex, setSelectedImageIndex, files, setFiles }}>
-      <Container size="xl" fluid={true} mih="100vh">
+      <Container size="xl" fluid={true}>
         <Grid cols={12}>
-          <Grid.Col bg="teal" span={3}>
+          {/* Caption Column */}
+          <Grid.Col span={3}>
             <CaptionTemplateForm />
           </Grid.Col>
-          <Grid.Col bg="gray" span={6}>
+
+          {/* Image Column */}
+          <Grid.Col span={6} display="flex">
             <ImageSelector />
           </Grid.Col>
+
+          {/* File Column */}
           <Grid.Col span={3}>
             <Card withBorder shadow="sm" radius="md">
               <Card.Section withBorder inheritPadding py="xs">
@@ -35,7 +40,6 @@ export const Captioner = () => {
                 </Card.Section>
               </Card.Section>
             </Card>
-
           </Grid.Col>
         </Grid>
       </Container>

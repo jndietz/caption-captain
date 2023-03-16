@@ -88,7 +88,6 @@ export const Nav = () => {
   return (
     <>
       <Navbar
-        // height={"100vh"}
         width={{ base: 80 }}
         p="md"
         sx={(theme) => ({
@@ -107,7 +106,7 @@ export const Nav = () => {
         </Navbar.Section>
       </Navbar>
 
-      <div css={() => css({ padding: "1.5rem", width: "100%" })}>
+      <div css={() => css({ width: "100%" })}>
         <Outlet />
       </div>
     </>

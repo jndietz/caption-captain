@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "start:server": "babel-node --presets @babel/preset-env src/server/server.js",
-    "start:server-watch": "nodemon --exec npm run start:server",
+    "start:server": "babel-node --presets @babel/preset-env server/server.js",
+    "start:server-watch": "nodemon --watch server --exec npm run start:server",
     "test": "jest",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
