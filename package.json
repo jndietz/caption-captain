@@ -8,7 +8,7 @@
     "start:server": "babel-node --presets @babel/preset-env server/server.js",
     "start:server-watch": "nodemon --watch server --exec npm run start:server",
     "test": "jest",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
   },
   "author": "",

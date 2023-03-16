@@ -1,3 +1,4 @@
+import { Grid } from '@mantine/core';
 import { rest } from 'msw'
 import React from 'react';
 
@@ -12,7 +13,14 @@ export default {
   component: FolderInput,
 }
 
-export const Primary = () => <FolderInput />;
+export const Primary = () => (
+  <Grid>
+    <Grid.Col span={3}>
+      <FolderInput />
+    </Grid.Col>
+  </Grid>
+
+);
 Primary.parameters = {
   msw: {
     handlers: [

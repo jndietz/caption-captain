@@ -3,6 +3,7 @@ import { Textarea, Button, Group, Box, TextInput, ActionIcon } from '@mantine/co
 import { IconTrash } from '@tabler/icons-react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
+import { useFiles } from '../../hooks/useFiles';
 
 export const getCamelCasedFieldName = (fieldName) => {
     const regex = /(<(\w*):?>?)/;
@@ -17,7 +18,13 @@ export const getTitleCasedFieldName = (fieldName) => {
     return titleCasedFieldName;
 }
 
-export const CaptionTemplateForm = () => {    
+export const CaptionTemplateForm = () => {
+
+    const { files, selectedImageIndex } = useFiles();
+
+    useEffect(() => {
+        if (files) setValue("captionOutput", files.files[selectedImageIndex].caption);
+    }, [selectedImageIndex])
 
     const { control, getValues, register, setValue, formState, watch, reset } = useForm({
         defaultValues: {
@@ -62,7 +69,6 @@ export const CaptionTemplateForm = () => {
     const generateCaption = () => {
         let captionOutput = getValues("template");
         const fieldPlaceHolders = getFieldPlaceHolders();
-        debugger;
         fieldPlaceHolders.forEach(placeholder => {
             captionOutput = captionOutput.replace(placeholder, getValues(`templateFields.${getCamelCasedFieldName(placeholder)}.value`));
         });
@@ -70,8 +76,9 @@ export const CaptionTemplateForm = () => {
     }
 
     const saveCaption = async () => {
-        const { data } = await axios.post("/api/images", { filename: "abcd", caption: getValues("captionOutput") });
+        const { data } = await axios.post("/api/images", { filename: files.files[selectedImageIndex].filename, caption: getValues("captionOutput") });
         
+        console.log(data);
     }
 
     return (
@@ -95,8 +102,8 @@ export const CaptionTemplateForm = () => {
                         {...register(`templateFields.${field.name}.value`)} />)
                 }
                 )}
-                
-                <Textarea                    
+
+                <Textarea
                     mt="lg"
                     {...register('captionOutput')}
                     readOnly={true}

@@ -106,7 +106,7 @@ export const Nav = () => {
         </Navbar.Section>
       </Navbar>
 
-      <div css={() => css({ width: "100%" })}>
+      <div css={() => css({ width: "100%", maxHeight: "100vh", overflowY: "hidden" })}>
         <Outlet />
       </div>
     </>

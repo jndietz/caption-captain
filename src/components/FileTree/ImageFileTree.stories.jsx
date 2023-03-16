@@ -1,7 +1,9 @@
-import React from 'react';
-import { testData } from 'react-folder-tree';
-
+import React, { useEffect } from 'react';
+import { useFiles } from '../../hooks/useFiles';
 import { ImageFileTree } from './ImageFileTree';
+import testFileData from '../../test-utils/testFileData';
+import { Grid } from '@mantine/core';
+import { FilesContextWrapper } from '../../test-utils/FilesContextWrapper';
 
 export default {
   /* 👇 The title prop is optional.
@@ -12,10 +14,32 @@ export default {
   component: ImageFileTree,
 }
 
-console.log(testData);
+const Template = args => {
 
-const Template = args => <ImageFileTree {...args} />
-export const Primary = Template.bind({})
-Primary.args = {
-  files: testData
+  const { setFiles } = useFiles();
+
+  useEffect(() => {
+    setFiles(testFileData);
+  }, []);
+
+  return <ImageFileTree {...args} />
+
+}
+export const Primary = Template.bind({});
+
+export const Testing = () => {
+  const { setFiles } = useFiles();
+
+  useEffect(() => {
+    setFiles(testFileData);
+  }, []);
+
+  return (
+    <Grid>
+      <Grid.Col span={2}>
+        <ImageFileTree />
+      </Grid.Col>
+    </Grid>
+
+  )
 }

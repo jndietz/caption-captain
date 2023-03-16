@@ -5,3 +5,13 @@ body {
 #app {
     display: flex;
 }
+
+/* customize how react-folder-tree is styled */
+.FolderTree {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.iconContainer {
+    white-space: nowrap;
+}

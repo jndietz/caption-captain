@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useFiles } from '../../hooks/useFiles';
 
 import { ImageSelector } from './ImageSelector';
+
+import testFileData from '../../test-utils/testFileData';
 
 export default {
   /* 👇 The title prop is optional.
@@ -11,12 +14,15 @@ export default {
   component: ImageSelector,
 }
 
-const Template = args => <ImageSelector {...args} />
+const Template = args => {
 
-export const Primary = Template.bind({})
-Primary.args = {
-  images: [
-    "https://m.media-amazon.com/images/M/MV5BZGM0YjhkZmEtNGYxYy00OTk0LThlNDgtNGQzM2YwNjU0NDQzXkEyXkFqcGdeQXVyMTU3ODQxNDYz._V1_FMjpg_UX1000_.jpg",
-    "https://ntvb.tmsimg.com/assets/assets/516020_v9_bc.jpg?w=270&h=360"
-  ]
+  const { setFiles } = useFiles();
+
+  useEffect(() => {
+    setFiles(testFileData);
+  }, [])
+
+  return <ImageSelector {...args} />;
 }
+
+export const Primary = Template.bind({});
