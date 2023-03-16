@@ -70,7 +70,8 @@ export const CaptionTemplateForm = () => {
     }
 
     const saveCaption = async () => {
-        const { data } = await axios.get("/api/images");
+        const { data } = await axios.post("/api/images", { filename: "abcd", caption: getValues("captionOutput") });
+        
     }
 
     return (

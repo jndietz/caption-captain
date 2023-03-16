@@ -1,18 +1,18 @@
 import { rest } from 'msw'
 import React from 'react';
 
-import { CaptionEditor } from './CaptionEditor';
+import { FolderInput } from './FolderInput';
 
 export default {
   /* 👇 The title prop is optional.
   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
   * to learn how to generate automatic titles
   */
-  title: 'Caption Editor',
-  component: CaptionEditor,
+  title: 'Folder Input',
+  component: FolderInput,
 }
 
-export const Primary = () => <CaptionEditor />;
+export const Primary = () => <FolderInput />;
 Primary.parameters = {
   msw: {
     handlers: [

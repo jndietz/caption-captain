@@ -1,6 +1,6 @@
 import './app.css';
 import { Nav } from "./components/Nav/Nav";
-import { Caption } from './components/Caption/Captioner';
+import { Captioner } from './components/Caption/Captioner';
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/caption",
-                element: <Caption />,
+                element: <Captioner />,
                 //loader: async ({ params }) => await axios.get(`/api/images`)
             },
             {
@@ -26,9 +26,5 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 
 const RoutedApp = () => <RouterProvider router={router} />
-
-if (module.hot) {
-    module.hot.accept();
-}
 
 root.render(<RoutedApp />);
