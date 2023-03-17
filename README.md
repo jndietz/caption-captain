@@ -10,7 +10,6 @@
 
 1. Run `git clone https://github.com/jndietz/caption-captain.git`
 1. `cd c:\projects\caption-captain`
-1. `npm install --legacy-peer-deps`
 1. `npm run start`
 1. Navigate your browser to `http://localhost:1337`.
 
