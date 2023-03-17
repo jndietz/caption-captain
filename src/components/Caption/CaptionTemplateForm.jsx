@@ -87,7 +87,7 @@ export const CaptionTemplateForm = () => {
                 <Textarea
                     {...register("template", { onChange: () => handleTemplateOnChange() })}
                     label="Caption Template"
-                    autosize
+                    autosize    
                 />
 
                 <Group position="right" mt="md">
@@ -106,7 +106,7 @@ export const CaptionTemplateForm = () => {
                 <Textarea
                     mt="lg"
                     {...register('captionOutput')}
-                    readOnly={true}
+                    minRows={10}
                 />
 
                 <Group position="right" mt="md">

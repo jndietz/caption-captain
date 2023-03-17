@@ -1,18 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import { Container, Grid, Stack, Card, Group, Text } from '@mantine/core';
+import { Container, Grid, Stack, Card, Text, ActionIcon } from '@mantine/core';
 import { FolderInput } from './FolderInput';
 import { CaptionTemplateForm } from './CaptionTemplateForm';
 import { ImageSelector } from '../ImageSelector/ImageSelector';
 import { ImageFileTree } from '../FileTree/ImageFileTree';
 import { FilesProvider } from '../../hooks/useFiles';
-import { css } from '@emotion/react';
+import { IconArrowsMinimize, IconArrowsMaximize } from '@tabler/icons-react';
 
 export const Captioner = () => {
 
-  const [path, setPath] = useState();
+  const [path, setPath] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState();
-  const [files, setFiles] = useState();
+  const [files, setFiles] = useState();  
+
+  const [showFilePicker, setShowFilePicker] = useState(true);
+
+  const handleFileWindowResize = () => setShowFilePicker(!showFilePicker);
 
   return (
     <FilesProvider value={{ path, setPath, selectedImageIndex, setSelectedImageIndex, files, setFiles }}>
@@ -22,19 +26,27 @@ export const Captioner = () => {
           <Grid.Col span={3}>
             <Stack>
               <Card withBorder shadow="sm" radius="md">
-                <Card.Section withBorder inheritPadding py="xs">
-                  <Text weight={500}>Files</Text>
+                <Card.Section withBorder inheritPadding py="xs" display="flex">
+                  <Text fw={700}>Files</Text>
+                  <ActionIcon ml="auto">
+                    {showFilePicker && <IconArrowsMinimize onClick={handleFileWindowResize} />}
+                    {!showFilePicker && <IconArrowsMaximize onClick={handleFileWindowResize} />}
+                  </ActionIcon>
                 </Card.Section>
-                <Card.Section>
+
+                {showFilePicker && <Card.Section>
                   <FolderInput />
                 </Card.Section>
-                <Card.Section px="lg" py="lg">
+                }
+
+                {showFilePicker && <Card.Section px="lg" py="lg">
                   {files && <ImageFileTree />}
                 </Card.Section>
+                }
               </Card>
               <Card withBorder shadow="sm" radius="md">
-                <Card.Section withBorder inheritPadding shadow="sm" radius="md">
-                  <Text weight={500}>Captions</Text>
+                <Card.Section withBorder inheritPadding py="xs">
+                  <Text fw={700}>Captions</Text>
                 </Card.Section>
                 <Card.Section px="lg" py="lg">
                   <CaptionTemplateForm />

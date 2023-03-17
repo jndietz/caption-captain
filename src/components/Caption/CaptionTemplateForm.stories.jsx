@@ -1,3 +1,4 @@
+import { Grid } from '@mantine/core';
 import React from 'react';
 
 import { CaptionTemplateForm } from './CaptionTemplateForm';
@@ -12,3 +13,10 @@ export default {
 }
 
 export const Primary = () => <CaptionTemplateForm />;
+export const PrimaryWithColumn = () => (
+  <Grid>
+    <Grid.Col span={3}>
+      <CaptionTemplateForm />
+    </Grid.Col>
+  </Grid>
+)

@@ -88,7 +88,7 @@ export const Nav = () => {
   return (
     <>
       <Navbar
-        width={{ base: 80 }}
+        width={{ base: 80 }}                
         p="md"
         sx={(theme) => ({
           backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor })
@@ -106,7 +106,7 @@ export const Nav = () => {
         </Navbar.Section>
       </Navbar>
 
-      <div css={() => css({ width: "100%", maxHeight: "100vh", overflowY: "hidden" })}>
+      <div css={() => css({ width: "100%" })}>
         <Outlet />
       </div>
     </>

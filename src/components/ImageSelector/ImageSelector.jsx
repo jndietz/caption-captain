@@ -16,13 +16,13 @@ export const ImageSelector = () => {
     }, [selectedImageIndex])
 
     const slides = files ? files.files.map((file, index) => (
-        <Carousel.Slide mah="90vh" display="flex" key={index}>
-            <img css={() => css({ marginLeft: "auto", marginRight: "auto" })} src={`data:${file.mimeType};base64,${file.imageData}`} />
+        <Carousel.Slide display="flex" key={index} css={() => css({ justifyContent: "center" })}>
+            <img src={`data:${file.mimeType};base64,${file.imageData}`} css={() => css({ maxWidth: "100%", maxHeight: "100%" })} />
         </Carousel.Slide>
     )) : [];
 
     return (
-        <Carousel getEmblaApi={setEmbla} height="100%" onSlideChange={index => setSelectedImageIndex(index)}>
+        <Carousel align="center" height="90vh" getEmblaApi={setEmbla} onSlideChange={index => setSelectedImageIndex(index)}>
             {slides}
         </Carousel>
     );
