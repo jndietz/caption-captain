@@ -1,3 +1,4 @@
+import path from 'path';
 import mime from 'mime-types';
 import express from 'express';
 import fs from 'fs';
@@ -7,7 +8,9 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/images', async (req, res) => {
+app.use(express.static('dist'));
+
+app.get('/api/images', async (req, res) => {
     const path = req.query["path"];
 
     if (path) {
@@ -51,7 +54,7 @@ app.get('/images', async (req, res) => {
     }
 });
 
-app.post("/captions", async (req, res) => {
+app.post("/api/captions", async (req, res) => {
 
     const body = req.body;
 
@@ -73,7 +76,9 @@ app.post("/captions", async (req, res) => {
     }
 
     return res.json(response);
-})
+});
+
+app.get('*', (req, res) => res.sendFile(path.resolve('dist', 'index.html')));
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
