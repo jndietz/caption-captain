@@ -1,6 +1,6 @@
-import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { FilesContextWrapper } from '../src/test-utils/FilesContextWrapper';
-import '../src/app.css';
+import { initialize, mswDecorator } from "msw-storybook-addon";
+import { FilesContextWrapper } from "../src/test-utils/FilesContextWrapper";
+import "../src/app.css";
 
 // Initialize MSW
 initialize();
@@ -13,14 +13,13 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
   mswDecorator,
-  (Story) =>
-  (
+  (Story) => (
     <FilesContextWrapper>
       <Story />
     </FilesContextWrapper>
-  )
+  ),
 ];

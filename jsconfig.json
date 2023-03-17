@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
-        "jsxImportSource": "@emotion/react"
-    }
+  "compilerOptions": {
+    "jsxImportSource": "@emotion/react"
+  }
 }

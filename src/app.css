@@ -1,17 +1,17 @@
 body {
-    margin: auto;
+  margin: auto;
 }
 
 #app {
-    display: flex;
+  display: flex;
 }
 
 /* customize how react-folder-tree is styled */
 .FolderTree {
-    height: 200px;
-    overflow-y: scroll;
+  height: 200px;
+  overflow-y: scroll;
 }
 
 .iconContainer {
-    white-space: nowrap;
+  white-space: nowrap;
 }

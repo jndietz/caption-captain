@@ -1,25 +1,35 @@
-import { useState } from 'react';
-import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack, rem } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
-import { IconHome2, IconGauge, IconSettings } from '@tabler/icons-react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { css } from '@emotion/react';
+import { useState } from "react";
+import {
+  Navbar,
+  Center,
+  Tooltip,
+  UnstyledButton,
+  createStyles,
+  Stack,
+  rem,
+  Image,
+} from "@mantine/core";
+import { IconGauge, IconSettings } from "@tabler/icons-react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { css } from "@emotion/react";
+import captionCaptainLogo from "../../images/caption-captain-256.png";
 
 const useStyles = createStyles((theme) => ({
   link: {
     width: rem(50),
     height: rem(50),
     borderRadius: theme.radius.md,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     color: theme.white,
     opacity: 0.85,
 
-    '&:hover': {
+    "&:hover": {
       opacity: 1,
       backgroundColor: theme.fn.lighten(
-        theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
+        theme.fn.variant({ variant: "filled", color: theme.primaryColor })
+          .background,
         0.1
       ),
     },
@@ -27,9 +37,10 @@ const useStyles = createStyles((theme) => ({
 
   active: {
     opacity: 1,
-    '&, &:hover': {
+    "&, &:hover": {
       backgroundColor: theme.fn.lighten(
-        theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
+        theme.fn.variant({ variant: "filled", color: theme.primaryColor })
+          .background,
         0.15
       ),
     },
@@ -38,28 +49,25 @@ const useStyles = createStyles((theme) => ({
 
 const menuItems = [
   {
-    icon: IconHome2,
-    location: "/",
-    label: "Home"
-  },
-  {
     icon: IconGauge,
     location: "/caption",
-    label: "Caption"
+    label: "Caption",
   },
   {
     icon: IconSettings,
     location: "/settings",
-    label: "Settings"
-  }
-]
+    label: "Settings",
+  },
+];
 
 function NavbarLink({ icon: Icon, label, active, onClick }) {
-
   const { classes, cx } = useStyles();
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
-      <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
+      <UnstyledButton
+        onClick={onClick}
+        className={cx(classes.link, { [classes.active]: active })}
+      >
         <Icon size="1.2rem" stroke={1.5} />
       </UnstyledButton>
     </Tooltip>
@@ -67,14 +75,13 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 }
 
 export const Nav = () => {
-
   const [active, setActive] = useState(2);
   const navigate = useNavigate();
 
   const handleNavigate = (link, index) => {
     setActive(index);
-    navigate(link.location)
-  }
+    navigate(link.location);
+  };
 
   const links = menuItems.map((link, index) => (
     <NavbarLink
@@ -88,15 +95,17 @@ export const Nav = () => {
   return (
     <>
       <Navbar
-        width={{ base: 80 }}                
+        width={{ base: 80 }}
         p="md"
         sx={(theme) => ({
-          backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor })
-            .background,
+          backgroundColor: theme.fn.variant({
+            variant: "filled",
+            color: theme.primaryColor,
+          }).background,
         })}
       >
         <Center>
-          <MantineLogo type="mark" inverted size={30} />
+          <Image src={captionCaptainLogo} />
         </Center>
 
         <Navbar.Section grow mt={50}>
@@ -110,5 +119,5 @@ export const Nav = () => {
         <Outlet />
       </div>
     </>
-  )
-}
+  );
+};
