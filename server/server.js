@@ -87,5 +87,5 @@ app.post("/api/captions", async (req, res) => {
 app.get("*", (req, res) => res.sendFile(path.resolve("dist", "index.html")));
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Caption Captain is running!  Navigate your browser to http://localhost:${port}`);
 });
