@@ -40,8 +40,9 @@ export const CaptionTemplateForm = () => {
   const { control, getValues, register, setValue, formState, watch, reset } =
     useForm({
       defaultValues: {
-        template: "A <drawingType> of a <gender> sitting on a <chairType>",
+        template: "",
         templateFields: [],
+        captionOutput: ""
       },
     });
 
@@ -129,6 +130,7 @@ export const CaptionTemplateForm = () => {
     <Box mx="auto">
       <form>
         <Textarea
+          placeholder="a <imageType> of a <animalType> eating a <foodType>"
           {...register("template", {
             onChange: () => handleTemplateOnChange(),
           })}
