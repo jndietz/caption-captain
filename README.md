@@ -36,3 +36,7 @@ Template fields are wrapped in angle brackets `<>`. An example caption may be so
 <img src="docs/img/caption-template02.png"
      alt="Load files from folder"
      height="700" />
+
+# Do I have to use template-based captions?
+
+Nope!  You can type whatever you want into the caption output text field and it will save.
