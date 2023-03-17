@@ -116,8 +116,7 @@ export const CaptionTemplateForm = () => {
         }
         return file;
       });
-      setFiles({ total: updatedFiles.length, files: updatedFiles });
-      console.log(classes.backgroundColor);
+      setFiles({ total: updatedFiles.length, files: updatedFiles });    
       toast.success(`Saved caption for ${imageFilename}!`);
     } catch (e) {
       toast.error("Something bad happened...😲");
