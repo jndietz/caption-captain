@@ -3,6 +3,7 @@ import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import { useFiles } from '../../hooks/useFiles';
 import { useEffect, useState } from 'react';
+import { css } from '@emotion/react';
 
 export const ImageSelector = () => {
 
@@ -15,13 +16,13 @@ export const ImageSelector = () => {
     }, [selectedImageIndex])
 
     const slides = files ? files.files.map((file, index) => (
-        <Carousel.Slide key={index}>
-            <Image src={`data:${file.mimeType};base64,${file.imageData}`} />
+        <Carousel.Slide mah="90vh" display="flex" key={index}>
+            <img css={() => css({ marginLeft: "auto", marginRight: "auto" })} src={`data:${file.mimeType};base64,${file.imageData}`} />
         </Carousel.Slide>
     )) : [];
 
     return (
-        <Carousel mah="100%" getEmblaApi={setEmbla} onSlideChange={index => setSelectedImageIndex(index)}>
+        <Carousel getEmblaApi={setEmbla} height="100%" onSlideChange={index => setSelectedImageIndex(index)}>
             {slides}
         </Carousel>
     );
