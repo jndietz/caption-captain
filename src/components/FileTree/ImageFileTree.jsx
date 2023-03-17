@@ -17,7 +17,7 @@ export const ImageFileTree = () => {
     if (span) span.style.fontWeight = "bold";
   }, [selectedImageIndex]);
 
-  const mappedFiles = files ?
+  const mappedFiles = (files && files.files) ?
     {
       name: `Images (${files.total})`,
       children: files.files.map((file, index) => ({

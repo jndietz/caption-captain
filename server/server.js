@@ -51,25 +51,28 @@ app.get('/images', async (req, res) => {
     }
 });
 
-app.post("/images", async (req, res) => {
+app.post("/captions", async (req, res) => {
 
     const body = req.body;
 
-    const { captionFilename: filename, caption } = body;
+    const { filename, caption } = body;
+
+    console.log(body);
 
     try {
-        await fsp.writeFile(filename, caption);
+        await fsp.writeFile(`${filename}`, caption, { flag: 'w' });
     } catch (e) {
+        console.error(e);
         console.error("An error occurred trying to write the file");
-        res.send(500);
+        return res.status(500);
     }
 
     const response = {
-        captionFilename: filename,
+        filename,
         caption
     }
 
-    res.status(200).send(response);
+    return res.json(response);
 })
 
 app.listen(port, () => {

@@ -15,7 +15,7 @@ export const ImageSelector = () => {
         if (embla) embla.scrollTo(selectedImageIndex);
     }, [selectedImageIndex])
 
-    const slides = files ? files.files.map((file, index) => (
+    const slides = (files && files.files) ? files.files.map((file, index) => (
         <Carousel.Slide display="flex" key={index} css={() => css({ justifyContent: "center" })}>
             <img src={`data:${file.mimeType};base64,${file.imageData}`} css={() => css({ maxWidth: "100%", maxHeight: "100%" })} />
         </Carousel.Slide>

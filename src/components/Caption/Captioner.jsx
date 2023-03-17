@@ -12,7 +12,7 @@ export const Captioner = () => {
 
   const [path, setPath] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState();
-  const [files, setFiles] = useState();  
+  const [files, setFiles] = useState();
 
   const [showFilePicker, setShowFilePicker] = useState(true);
 
@@ -34,14 +34,17 @@ export const Captioner = () => {
                   </ActionIcon>
                 </Card.Section>
 
-                {showFilePicker && <Card.Section>
-                  <FolderInput />
-                </Card.Section>
-                }
+                {showFilePicker ?
+                  <>
+                    <Card.Section>
+                      <FolderInput />
+                    </Card.Section>
 
-                {showFilePicker && <Card.Section px="lg" py="lg">
-                  {files && <ImageFileTree />}
-                </Card.Section>
+
+                    <Card.Section px="lg" py="lg">
+                      {files && <ImageFileTree />}
+                    </Card.Section>
+                  </> : null
                 }
               </Card>
               <Card withBorder shadow="sm" radius="md">

@@ -1,9 +1,11 @@
-import { useRef, useEffect } from 'react';
-import { Textarea, Button, Group, Box, TextInput, ActionIcon } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { Textarea, Button, Group, Box, TextInput, ActionIcon, Transition } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 import { useFiles } from '../../hooks/useFiles';
+
+import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 export const getCamelCasedFieldName = (fieldName) => {
     const regex = /(<(\w*):?>?)/;
@@ -20,7 +22,9 @@ export const getTitleCasedFieldName = (fieldName) => {
 
 export const CaptionTemplateForm = () => {
 
-    const { files, selectedImageIndex } = useFiles();
+    const [isSaving, setIsSaving] = useState(false);    
+
+    const { path, files, setFiles, selectedImageIndex } = useFiles();
 
     useEffect(() => {
         if (files) setValue("captionOutput", files.files[selectedImageIndex].caption);
@@ -76,9 +80,27 @@ export const CaptionTemplateForm = () => {
     }
 
     const saveCaption = async () => {
-        const { data } = await axios.post("/api/images", { filename: files.files[selectedImageIndex].filename, caption: getValues("captionOutput") });
-        
-        console.log(data);
+        setIsSaving(true);
+        const imageFilename = files.files[selectedImageIndex].filename;        
+        const captionFileName = imageFilename.replace(/\.[^/.]+$/, ".txt");
+        const captionFullPath = `${path}\\${captionFileName}`
+        const caption = getValues("captionOutput");
+
+        try {
+            const { data } = await axios.post("/api/captions", { filename: captionFullPath, caption });
+            console.log(data);        
+            setIsSaving(false);
+            const updatedFiles = files.files.map((file, index) => {
+                if (index === selectedImageIndex) {
+                    file.caption = caption;
+                }
+                return file;
+            });
+            setFiles({ total: updatedFiles.length, files: updatedFiles });
+        } catch (e) {
+            console.error(e);
+            setIsSaving(false);
+        }        
     }
 
     return (
@@ -87,7 +109,7 @@ export const CaptionTemplateForm = () => {
                 <Textarea
                     {...register("template", { onChange: () => handleTemplateOnChange() })}
                     label="Caption Template"
-                    autosize    
+                    autosize
                 />
 
                 <Group position="right" mt="md">
@@ -111,7 +133,14 @@ export const CaptionTemplateForm = () => {
 
                 <Group position="right" mt="md">
                     <Button type="button" onClick={() => generateCaption()}>Generate Caption</Button>
-                    <Button type="button" disabled={!formState.isValid} onClick={() => saveCaption()}>Save Caption</Button>
+                    <Button
+                        type="button"
+                        leftIcon={<IconCircleCheckFilled />}
+                        loading={isSaving}
+                        disabled={!formState.isValid}
+                        onClick={() => saveCaption()
+                        }>Save Caption
+                    </Button>
                     <ActionIcon onClick={() => reset()}><IconTrash size="1rem" /></ActionIcon>
                 </Group>
             </form>
