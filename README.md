@@ -1,8 +1,10 @@
 # <div align="center">Caption Captain 😎</div>
 
-![Caption Captain](src/images/caption-captain-256.png)
+<p align="center">
+<img width="25%" src="src/images/caption-captain-256.png">
+</p>
 
-<p style="text-align:center;">
+<p align="center">
 An easy-to-use template-based captioning utility you can run with nodejs.</p>
 
 # Dependencies
