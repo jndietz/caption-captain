@@ -18,31 +18,17 @@ An easy-to-use template-based captioning utility you can run with nodejs.</p>
 1. `npm run start`
 1. Navigate your browser to `http://localhost:1337`.
 
+# How-To Video
+
+https://user-images.githubusercontent.com/4515791/226194798-468ec4a1-9e23-45e4-9dc9-b1c26839f95f.mp4
+
 # Caption Templating
 
 Template fields are wrapped in angle brackets `<>`. An example caption may be something like:
 
 > `a <drawingType> of a <animalType> sitting on a <chairType> eating a piece of <foodType>`.
 
-1. Load your images
-
-https://user-images.githubusercontent.com/4515791/226194798-468ec4a1-9e23-45e4-9dc9-b1c26839f95f.mp4
-
-<img src="docs/img/folder-path.png"
-     alt="Load files from folder"
-     height="400" />
-
-2. Type in a caption template then click create fields.
-
-<img src="docs/img/caption-template01.png"
-     alt="Load files from folder"
-     height="700" />
-
-3. Fill in the fields as desired, then click on "Save Caption"
-
-<img src="docs/img/caption-template02.png"
-     alt="Load files from folder"
-     height="700" />
+Clicking `Generate Fields` will create an input for each placeholder in your template string.
 
 # Do I have to use template-based captions?
 
