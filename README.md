@@ -26,6 +26,8 @@ Template fields are wrapped in angle brackets `<>`. An example caption may be so
 
 1. Load your images
 
+![](https://user-images.githubusercontent.com/4515791/226194798-468ec4a1-9e23-45e4-9dc9-b1c26839f95f.mp4)
+
 <img src="docs/img/folder-path.png"
      alt="Load files from folder"
      height="400" />
