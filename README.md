@@ -1,10 +1,7 @@
-# <p style="text-align: center;">Caption Captain 😎</p>
+# <div align="center">Caption Captain 😎</div>
 
-
-
-<p style="text-align:center;">
 ![Caption Captain](src/images/caption-captain-256.png)
-</p>
+
 <p style="text-align:center;">
 An easy-to-use template-based captioning utility you can run with nodejs.</p>
 
