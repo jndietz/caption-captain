@@ -155,7 +155,7 @@ export const CaptionTemplateForm = () => {
             );
           })}
 
-        <Textarea mt="lg" {...register("captionOutput")} minRows={10} />
+        <Textarea mt="lg" label="Caption Output" {...register("captionOutput")} minRows={10} />
 
         <Group position="right" mt="md">
           <Button type="button" onClick={() => generateCaption()}>

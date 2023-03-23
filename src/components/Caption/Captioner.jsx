@@ -33,7 +33,7 @@ export const Captioner = () => {
       <Container px="lg" py="lg" size="xl" fluid={true}>
         <Grid mah="100px" cols={12}>
           {/* Caption Column */}
-          <Grid.Col span={3}>
+          <Grid.Col span={3} sx={theme => ({ overflowY: "auto", maxHeight: "90vh" })}>
             <Stack>
               <Card withBorder shadow="sm" radius="md">
                 <Card.Section withBorder inheritPadding py="xs" display="flex">
