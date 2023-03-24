@@ -22,7 +22,7 @@ app.get("/api/images", async (req, res) => {
 
     const fileAndCaptionData = await Promise.all(
       filteredFiles.map(async (filename) => {
-        const fullImagePath = `${path}\\${filename}`;
+        const fullImagePath = `${path}/${filename}`;
         const mimeType = mime.lookup(fullImagePath);
         const imageData = await fsp.readFile(fullImagePath, {
           encoding: "base64",
@@ -32,7 +32,7 @@ app.get("/api/images", async (req, res) => {
         let caption = "";
 
         try {
-          const captionPath = `${path}\\${captionFilename}`;
+          const captionPath = `${path}/${captionFilename}`;
           const captionExists = fs.existsSync(captionPath);
           if (captionExists) {
             caption = await fsp.readFile(captionPath, { encoding: "utf8" });
