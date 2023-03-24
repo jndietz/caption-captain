@@ -9,7 +9,7 @@ An easy-to-use template-based captioning utility you can run with nodejs.</p>
 
 # Dependencies
 
-- NodeJS 18+
+- NodeJS 18.15+
 
 # Installation
 
