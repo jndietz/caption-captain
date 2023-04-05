@@ -100,7 +100,7 @@ export const CaptionTemplateForm = () => {
     setIsSaving(true);
     const imageFilename = files.files[selectedImageIndex].filename;
     const captionFileName = imageFilename.replace(/\.[^/.]+$/, ".txt");
-    const captionFullPath = `${path}\\${captionFileName}`;
+    const captionFullPath = `${path}/${captionFileName}`;
     const caption = getValues("captionOutput");
 
     try {
