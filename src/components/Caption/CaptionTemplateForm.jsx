@@ -167,11 +167,20 @@ export const CaptionTemplateForm = () => {
         {controlledFields &&
           controlledFields.map((field) => {
             if (field.values.length > 0) {
-              return <Select
-                searchable
-                label={field.label}
-                data={field.values.map(value => ({ value, label: value }))}
-              />
+              return (
+                <div>
+                  <label htmlFor={field.name}>{field.label}</label>
+                  <select {...register(`templateFields.${field.name}.value`)}>
+                    {field.values.map(value => <option key={value} value={value}>{value}</option>)}
+                  </select>
+                </div>
+              )
+              // return <Select
+              //   searchable
+              //   label={field.label}
+              //   data={field.values.map(value => ({ value, label: value }))}
+              //   {...register(`templateFields.${field.name}.value`)}
+              // />
 
 
             } else {
