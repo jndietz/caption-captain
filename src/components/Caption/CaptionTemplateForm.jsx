@@ -28,6 +28,24 @@ export const getTitleCasedFieldName = (fieldName) => {
   return titleCasedFieldName;
 };
 
+/**
+ * 
+ * @param {String} placeholder 
+ * @returns 
+ */
+const getValuesFromTemplate = placeholder => {
+  if (placeholder.includes("|")) {         
+    const startChar = ":";
+    const endChar = ">";
+    const startIndex = placeholder.indexOf(startChar);
+    const endIndex = placeholder.indexOf(endChar);
+    return placeholder.substring(startIndex + 1, endIndex).split("|");
+  } else {
+    return[]
+  }
+  
+}
+
 export const CaptionTemplateForm = () => {
   const [isSaving, setIsSaving] = useState(false);
   const { path, files, setFiles, selectedImageIndex } = useFiles();
@@ -60,13 +78,15 @@ export const CaptionTemplateForm = () => {
   });
 
   const generateFields = () => {
-    const fieldPlaceholders = getFieldPlaceHolders();
+    const fieldPlaceholders = getFieldPlaceHolders();  
     remove();
-    fieldPlaceholders.forEach((placeholder) =>
+    fieldPlaceholders.forEach((placeholder) => {    
       append({
         label: getTitleCasedFieldName(placeholder),
         name: getCamelCasedFieldName(placeholder),
+        values: getValuesFromTemplate(placeholder)
       })
+    }
     );
     setValue("captionOutput", getValues("template"));
   };
@@ -78,7 +98,7 @@ export const CaptionTemplateForm = () => {
   const getFieldPlaceHolders = () => {
     // TODO eventually support <fieldName:with|multiple|values>
     //     👇
-    const regex = /(<\w*\:?(\w*\s*|\w*\s*\|)+>)/g;
+    const regex = /<(\w+)(?::([\w\s|]+))?(\s*\|\s*(\w+))?\s*>/g;
     const templateString = getValues("template") || "";
     const templateFields = templateString.match(regex);
     return templateFields;
@@ -86,7 +106,7 @@ export const CaptionTemplateForm = () => {
 
   const generateCaption = () => {
     let captionOutput = getValues("template");
-    const fieldPlaceHolders = getFieldPlaceHolders();
+    const fieldPlaceHolders = getFieldPlaceHolders();    
     fieldPlaceHolders.forEach((placeholder) => {
       captionOutput = captionOutput.replace(
         placeholder,
@@ -144,15 +164,28 @@ export const CaptionTemplateForm = () => {
         </Group>
 
         {controlledFields &&
-          controlledFields.map((field) => {
-            return (
-              <TextInput
-                key={field.id}
-                required={true}
-                label={field.label}
-                {...register(`templateFields.${field.name}.value`)}
-              />
-            );
+          controlledFields.map((field) => {     
+            if (field.values.length > 0) {
+              return (
+                <div>
+                  <label htmlFor={field.name}>{field.label}</label>
+                  <select name={field.name} {...register(`templateFields.${field.name}.value`)}>
+                    {field.values.map((value, index) => <option key={index} value={value}>{value}</option>)}
+                  </select>
+                </div>                
+              )
+              
+            } else {
+              return (
+                <TextInput
+                  key={field.id}
+                  required={true}
+                  label={field.label}
+                  {...register(`templateFields.${field.name}.value`)}
+                />
+              );
+            }
+            
           })}
 
         <Textarea mt="lg" label="Caption Output" {...register("captionOutput")} minRows={10} />
